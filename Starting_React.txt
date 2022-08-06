@@ -1,0 +1,225 @@
+--Q1 - HOW TO CREATE A REACT APP
+
+To create a react app first you should have npx and Node.js installed.
+
+In terminal type -- npm uninstall -g create-react-app 
+to uninstall all outdated version of the same if you had it.
+
+Now type -- npx create-react-app your-app-name
+
+React app will be created.
+
+
+
+
+
+--Q2 - HOW TO RUN THE REACT APP
+
+After creating the react app, cd to its location using -- cd your-app-name.
+
+Then just use -- npm start 
+ to run the app.
+
+
+
+
+
+
+ --Q3 - IS EVERTHING THAT IS THERE IN THE APP NECESSARY?
+
+ No just the index.js file in src and index.html file in public is necessary.You can leave the css file too.
+ Don't delete anything outside of public and src folder though.
+
+ package.json is importing all the dependencies required and node modules are necessary for the app to function.
+
+
+
+
+
+
+ --Q4 - IS THERE A BASIC TEMPLATE OF REACT IN APP.JS FOLDER?
+
+Yes, there is.
+
+import React from "react";
+import ReactDOM from "react-dom";
+
+ReactDOM.render(
+  <div>
+    <h1>All html goes here</h1>
+  </div>,
+  document.getElementById("root")
+);
+
+
+
+
+
+
+
+--Q5 - WHAT ABOUT INDEX.HTML?
+
+Following is the necessary code inside the index.html file.
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>JSX</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script src="../src/index.js" type="text/javascript"></script>
+  </body>
+</html>
+
+
+
+
+
+
+
+--Q6 - HOW DO WE DIVIDE REACT PAGE AS IN WHERE IS JS WRITTEN, WHERE IS HTML AND CSS WRITTEN?
+
+JS and corresponding variables and methods are generally written above the render method and can be used
+ inside render using two brackets -- {}.
+
+HTML is only written inside render.
+
+CSS can be created as an external file but can also be used in html like in normal webdev 
+using {style = } or <style> tag.
+
+
+Example:
+
+import React from "react";
+import ReactDOM from "react-dom";
+
+const Name = "Abhinav";
+const birthYear = 2001;
+const currentDate = new Date();
+const currentYear = currentDate.getFullYear();
+
+const age = currentYear - birthYear;
+
+ReactDOM.render(
+  <div>
+    <h1>My name is {Name} and I am {age} years old.</h1>
+  </div>,
+  document.getElementById("root")
+);
+
+
+
+
+
+
+
+--Q7 - WHAT IS IMPORT,EXPORT AND APP IN REACT?
+
+If all functions and variables in js and html are put in same page, it will become crowded
+and impossible to debug.
+
+The power of React lies in creating components of even the smallest element on the website.
+
+That component is then exported to next bigger component, at the end all components are imported by App.js.
+
+and only thing rendered is app.jsx then, below is the example of the same taking the above program and dividing
+it into components.
+
+
+Example:
+
+---Inside Heading.jsx---
+
+import React from "react";
+
+function Heading() {
+  //Creating custom style for each greeting
+  const CustomStyle = {
+    color: ""
+  };
+
+  const date1 = new Date();
+  const hour = date1.getHours();
+  //console.log(hour);
+
+  var greeting;
+
+  if (hour >= 16) {
+    greeting = "Good Evening";
+    CustomStyle.color = "Red";
+  } else if (hour >= 12 && hour < 16) {
+    greeting = "Good Afternoon";
+    CustomStyle.color = "Green";
+  } else {
+    greeting = "Good Morning";
+    CustomStyle.color = "Blue";
+  }
+
+  return (
+    <div>
+      <h1 className="heading" style={CustomStyle}>
+        {greeting}
+      </h1>
+    </div>
+  );
+}
+
+export default Heading;
+
+
+
+---Inside App.jsx---
+
+import React from "react";
+import Heading from "./Heading";
+
+function App() {
+  return (
+    <div>
+      <Heading />
+    </div>
+  );
+}
+
+export default App;
+
+
+
+
+---Inside Index.js---
+
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./components/App";
+
+ReactDOM.render(<App />, document.getElementById("root"));
+
+
+
+
+
+
+
+--Q8 - WHAT IS THE CODE FOR EXPORTING MULTIPLE METHODS?
+
+export {methodname1,methodname2,etc};
+
+-- in the bigger file we import as 
+
+import {methodname1,methodname2} from "./component/fileName"
+
+
+
+
+
+
+--Q9 - CAN WE PASS PARAMETERS TO THESE FUNCTIONS IN COMPONENT TREE?
+
+Yes we can, using props.
+
+Rest of the questions can be referred from repo.
+
+
